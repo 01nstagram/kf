@@ -32,25 +32,32 @@ function sendToast(message, duration = 4000) {
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  const style = document.createElement("style");
-  style.textContent = `
-    @keyframes fadeOut { 0% { opacity: 1 } 100% { opacity: 0 } }
-    .khz-splash { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: flex; justify-content: center; align-items: center; z-index: 999999; color: #800080; font-size: 42px; font-family: sans-serif; font-weight: bold; transition: opacity 1s ease; }
-    .khz-splash.fadeout { animation: fadeOut 1s ease forwards; }
-    .khz-toggle { position: fixed; bottom: 20px; left: 20px; width: 40px; height: 40px; background: #111; border: 2px solid #800080; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; color: #fff; font-size: 20px; font-weight: bold; box-shadow: 0 0 10px #800080; font-family: sans-serif; transition: 0.3s; }
-    .khz-toggle:hover { background: #800080; }
-    .khz-panel { position: fixed; top: 100px; left: 100px; width: 300px; background: rgba(0, 0, 0, 0.95); border-radius: 16px; padding: 20px; z-index: 99999; color: #fff; font-family: sans-serif; box-shadow: 0 0 20px rgba(128, 0, 128, 0.6); cursor: grab; display: none; }
-    .khz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .khz-title { font-weight: bold; font-size: 20px; color: #800080; }
-    .khz-button { display: block; width: 100%; margin: 10px 0; padding: 10px; background: #111; color: white; border: 2px solid #800080; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.3s; }
-    .khz-button:hover { background: #800080; border-color: #fff; }
-    .khz-button.active{background:#800080;border-color:#800080;box-shadow:0 0 8px #800080;}
-    .khz-input-group { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
-    .khz-input-group label { font-size: 12px; color: #ccc; }
-    .khz-input-group input { width: 60px; background: #222; color: #fff; border: 1px solid #800080; border-radius: 4px; padding: 4px; text-align: center; }
-    .khz-toast{position:fixed;bottom:20px;right:20px;background:#111;color:#fff;border:1px solid #800080;border-radius:8px;padding:12px 16px;margin-top:10px;box-shadow:0 0 10px #800080;font-size:14px;font-family:sans-serif;z-index:999999;animation:fadeIn 0.3s ease-out;overflow:hidden;width:fit-content;max-width:300px}.khz-toast.hide{animation:fadeOut 0.5s ease forwards}.khz-toast-progress{position:absolute;left:0;bottom:0;height:4px;background:#800080;animation:toastProgress linear forwards;animation-duration:4s;width:100%}.khz-toast-message{position:relative;z-index:1}@keyframes toastProgress{from{width:100%}to{width:0%}}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(10px)}
+const style = document.createElement("style");
+style.textContent = `
+@keyframes fadeOut { 0% { opacity: 1 } 100% { opacity: 0 } }
+.khz-splash { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: flex; justify-content: center; align-items: center; z-index: 999999; color: #fff; font-size: 42px; font-family: sans-serif; font-weight: bold; transition: opacity 1s ease; }
+.khz-splash.fadeout { animation: fadeOut 1s ease forwards; }
+.khz-toggle { position: fixed; bottom: 20px; left: 20px; width: 40px; height: 40px; background: #111; border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100000; color: #fff; font-size: 20px; font-weight: bold; box-shadow: 0 0 10px #fff; font-family: sans-serif; transition: 0.3s; }
+.khz-toggle:hover { background: #fff; color: #000; }
+.khz-panel { position: fixed; top: 100px; left: 100px; width: 300px; background: rgba(0, 0, 0, 0.95); border-radius: 16px; padding: 20px; z-index: 99999; color: #fff; font-family: sans-serif; box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); cursor: grab; display: none; }
+.khz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.khz-title { font-weight: bold; font-size: 20px; color: #fff; }
+.khz-button { display: block; width: 100%; margin: 10px 0; padding: 10px; background: #111; color: white; border: 2px solid #fff; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.3s; }
+.khz-button:hover { background: #fff; color: #000; border-color: #000; }
+.khz-button.active{background:#fff;color:#000;border-color:#000;box-shadow:0 0 8px #fff;}
+.khz-input-group { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
+.khz-input-group label { font-size: 12px; color: #ccc; }
+.khz-input-group input { width: 60px; background: #222; color: #fff; border: 1px solid #fff; border-radius: 4px; padding: 4px; text-align: center; }
+.khz-toast{position:fixed;bottom:20px;right:20px;background:#111;color:#fff;border:1px solid #fff;border-radius:8px;padding:12px 16px;margin-top:10px;box-shadow:0 0 10px #fff;font-size:14px;font-family:sans-serif;z-index:999999;animation:fadeIn 0.3s ease-out;overflow:hidden;width:fit-content;max-width:300px}
+.khz-toast.hide{animation:fadeOut 0.5s ease forwards}
+.khz-toast-progress{position:absolute;left:0;bottom:0;height:4px;background:#fff;animation:toastProgress linear forwards;animation-duration:4s;width:100%}
+.khz-toast-message{position:relative;z-index:1}
+@keyframes toastProgress{from{width:100%}to{width:0%}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(10px)}}
 `;
-  document.head.appendChild(style);
+document.head.appendChild(style);
+
 
   const originalParse = JSON.parse;
   JSON.parse = function(text, reviver) {
