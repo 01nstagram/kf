@@ -182,7 +182,7 @@ document.head.appendChild(style);
         if (features.darkMode) {
             DarkReader.enable();
         }
-        sendToast("KHANZITOS Ativado!");
+        sendToast("KHAN FUCKER Ativado!");
     };
     document.head.appendChild(darkReaderScript);
 
@@ -217,7 +217,7 @@ document.head.appendChild(style);
         panel.className = "khz-panel";
         panel.innerHTML = `
           <div class="khz-header">
-            <div class="khz-title">KHANZITOS</div>
+            <div class="khz-title">KHAN FUCKER</div>
             <div>V1.0</div>
           </div>
           <button id="khz-btn-question" class="khz-button">Question Spoof [OFF]</button>
